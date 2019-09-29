@@ -1,0 +1,51 @@
+.main .el-pagination{
+  display: inline-block;
+}
+/*.main .main-select .el-input__inner{*/
+  /*width: 100px;*/
+  /*height: 36px;*/
+/*}*/
+
+.content-wrap2-color .content-wrap2-date2 .el-input__inner{
+  width: 300px;
+  height: 36px;
+}
+.content-wrap2-color .content-wrap2-type .el-input__inner{
+  width: 100px;
+  height: 36px;
+}
+.el-button--primary{
+  width: 60px;
+  height: 36px;
+  margin-right: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content2 .content-wrap2 .content-wrap2-color .content-wrap2-date .content-wrap2-input .el-input__inner{
+  width: 200px;
+  height: 36px;
+}
+.el-pagination span{
+  border: 1px solid #E5E5E5;
+  display: inline-block;
+  width: 56px;
+  height: 30px;
+  border-radius: 5px;
+}
+.el-table th>.cell{
+  display:flex;
+  justify-content:center;
+  align-items :center;
+}
+.el-table .cell {
+  display:flex;
+  justify-content:center;
+  align-items :center;
+}
+.el-table td, .el-table th.is-leaf {
+  background-color: #F4F6F8;
+}
+.el-table--enable-row-transition .el-table__body td{
+  background-color: #fff;
+}
