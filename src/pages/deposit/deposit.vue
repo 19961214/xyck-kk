@@ -23,7 +23,7 @@
         </div>
         <div class="content-text line">
           <!-- <p class="content-text1">{{userCashCountData}}</p>
-          <p class="content-text2">累计提现余额</p> -->
+          <p class="content-text2">累计提现余额</p>-->
         </div>
       </div>
     </div>
@@ -31,8 +31,8 @@
     <div class="content2">
       <div class="content-wrap2">
         <div class="content-wrap2-color">
+          <div class="content-wrap2-p">KK直播平台提现记录</div>
           <div class="content-wrap2-date">
-            <p class="content-wrap2-p">KK直播平台提现记录</p>
             <div class="content-wrap2-input">
               <el-input v-model="input" placeholder="订单号"></el-input>
             </div>
@@ -61,7 +61,9 @@
               ></el-option>
             </el-select>
           </div>
-          <el-button type="primary" @click="seach">查询</el-button>
+          <div class="btn-wrap">
+            <el-button type="primary" @click="seach">查询</el-button>
+          </div>
         </div>
 
         <div class="main">
@@ -112,7 +114,7 @@
 </template>
 <script>
 import "../../assets/stylus/elemet-ui-reset.css";
-import { getData , getUserCashCount } from "../../api/index";
+import { getData, getUserCashCount } from "../../api/index";
 export default {
   data() {
     return {
@@ -122,8 +124,8 @@ export default {
       size: 10, // 每页显示条数
       currentPage: 1, //当前页数
       // tableData: [],
-      tableDataList:[],//表格当前页显示的数据
-      userCashCountData:0,//提现汇总数据
+      tableDataList: [], //表格当前页显示的数据
+      userCashCountData: 0, //提现汇总数据
       options: [
         {
           value: "选项1",
@@ -138,8 +140,9 @@ export default {
           label: "提现失败"
         }
       ],
-      dataLength:0,//总数据数量
-      parameter:{ //请求表格数据参数
+      dataLength: 0, //总数据数量
+      parameter: {
+        //请求表格数据参数
         appId: "1018",
         certNo: "",
         orderId: "",
@@ -147,52 +150,54 @@ export default {
         userName: "",
         startTime: "",
         endTime: "",
-        status: "",
+        status: ""
       }
     };
   },
   methods: {
-    seach(){
+    seach() {
       this.parameter.orderId = this.input;
-      if(this.value=='选项1'){
-        var status = 2
-      }if(this.value=='选项2'){
-        var status = 0
-      }if(this.value=='选项3'){
-        var status = 3
+      if (this.value == "选项1") {
+        var status = 2;
+      }
+      if (this.value == "选项2") {
+        var status = 0;
+      }
+      if (this.value == "选项3") {
+        var status = 3;
       }
       this.parameter.status = status;
       this.parameter.startTime = this.value1[0];
       this.parameter.endTime = this.value1[1];
-      this.getUserCashList()
+      this.getUserCashList();
       // console.log(this.input,this.value1,status)
     },
     currentChange(currentPage) {
       this.currentPage = currentPage;
       this.parameter.pageNum = currentPage;
       // console.log(currentPage)
-      this.getUserCashList()
+      this.getUserCashList();
     },
     //获取首页提现汇总数据
-    async userCashCount(){
-        const result2 = await getUserCashCount({
+    async userCashCount() {
+      const result2 = await getUserCashCount({
         appId: "1018",
         certNo: "",
         orderId: "",
         pageNum: 0,
         userName: ""
       });
-      if(result2.code==1){
-        this.userCashCountData = result2.data.totalAmount
+      if (result2.code == 1) {
+        this.userCashCountData = result2.data.totalAmount;
       }
       // console.log(result2.data.totalAmount)
     },
     //获取首页提现表格数据
-    async getUserCashList(){
+    async getUserCashList() {
       // console.log('调用了')
       // console.log(this.parameter)
-      const parameter = this.parameter
-        const result = await getData(parameter);
+      const parameter = this.parameter;
+      const result = await getData(parameter);
       // if(result.code==1 && this.tableData.length>0){
       //   console.log('拼接')
       //   const arr1 = this.tableData
@@ -205,17 +210,16 @@ export default {
       //   this.tableData = result.rows;
       //   this.dataLength = result.total
       // }
-      if(result.code==1){
+      if (result.code == 1) {
         this.tableDataList = result.rows;
-        this.dataLength = result.total
+        this.dataLength = result.total;
       }
       // console.log(this.tableDataList)
     }
-
   },
   async mounted() {
-    this.getUserCashList()
-    this.userCashCount()
+    this.getUserCashList();
+    this.userCashCount();
   },
   computed: {
     // tableDataList() {
@@ -332,21 +336,34 @@ export default {
         width: 100%;
         background-color: #fff;
         border-bottom: 1px solid #eee;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         padding: 30px 0;
 
-        .content-wrap2-date {
-          display: flex !important;
-          align-items: center;
+        .content-wrap2-p {
+          display: inline-block;
+          font-size: 16px;
+          color: #333;
+          margin-left: 21px;
+          margin-right: 80px;
+        }
 
-          .content-wrap2-p {
-            font-size: 16px;
-            color: #333;
-            margin-left: 21px;
-            margin-right: 80px;
-          }
+        .content-wrap2-date {
+          display: inline-block;
+          margin-left: 21px;
+        }
+
+        .content-wrap2-date2 {
+          display: inline-block;
+          margin-left: 21px;
+        }
+
+        .content-wrap2-type {
+          display: inline-block;
+          margin-left: 21px;
+        }
+
+        .btn-wrap {
+          display: inline-block;
+          margin-left: 21px;
         }
       }
 
